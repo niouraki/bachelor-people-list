@@ -1,6 +1,7 @@
 <?php
 include 'dbconnection.php';
 
+// comment in to display errors
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
@@ -13,6 +14,7 @@ try {
         // update the users
         $id = $_POST['id']; //the ID of the person we wanted to edit from the hidden form field
 
+        // get values to update
         $firstname = $_POST['first_name'];
         $lastname = $_POST['last_name'];
         $email = $_POST['email'];
@@ -22,12 +24,14 @@ try {
         $car = $_POST['car'];
         $education = $_POST['education'];
 
+        // create the query and prepare
         $sqlQuery = "UPDATE t_people SET first_name=?, last_name=?, email=?, gender=?, occupation=?, skill=?, car=?, education=? WHERE id=?";
         $sql = $connection->prepare($sqlQuery);
         $sql -> bind_param('ssssssssi', $firstname, $lastname, $email, $gender, $occupation, $skill, $car, $education, $id);
 
         $sql -> execute(); // execute query
 
+        // redirect the user
         header("Location: index.php");
 
     } else {
@@ -41,6 +45,7 @@ try {
         $result = $sql->get_result();
         $rowData = mysqli_fetch_assoc($result);
 
+        // pass the values to the variables
         $firstname = $rowData['first_name'];
         $lastname = $rowData['last_name'];
         $email = $rowData['email'];

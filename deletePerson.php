@@ -1,6 +1,7 @@
 <?php
 include 'dbconnection.php';
 
+// comment in to see errors
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
@@ -18,7 +19,6 @@ try {
 
     header("Location: index.php");
 } catch (Exception $e) {
-    //TO DO show alert with msg
    echo $e->getMessage();
 }
 
